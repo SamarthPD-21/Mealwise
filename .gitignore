@@ -1,0 +1,22 @@
+# dependencies
+/node_modules
+
+# build
+/build
+
+# misc
+.DS_Store
+.env
+*.log
+
+# editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+Thumbs.db
+ehthumbs.db
