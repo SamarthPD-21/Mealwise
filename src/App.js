@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RandomRecipes from "./pages/RandomRecipes";
+import WeeklyPlanner from "./pages/WeeklyPlanner";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="p-4">
+        <nav className="flex gap-4 mb-4 text-blue-500 font-semibold">
+          <a href="/">Random Recipes</a>
+          <a href="/planner">Weekly Planner</a>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<RandomRecipes />} />
+          <Route path="/planner" element={<WeeklyPlanner />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
