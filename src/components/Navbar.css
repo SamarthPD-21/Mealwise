@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #fff5f0, #ffe0d3);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    transition: background 0.3s ease;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: #ff7043;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 6px 12px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .navbar a:hover {
+    background-color: #ff704320;
+    color: #ff5722;
+  }
+  
+  .navbar a.active {
+    color: #fff;
+    background-color: #ff7043;
+  }
+  

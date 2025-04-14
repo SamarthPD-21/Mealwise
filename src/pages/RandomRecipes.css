@@ -7,13 +7,14 @@
     border-radius: 15px;
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
-    transition: background 0.3s ease;
   }
+  
   .meal-finder h2 {
     margin-bottom: 1rem;
     font-size: 2.2rem;
     color: #333;
   }
+  
   .meal-finder button {
     padding: 10px 20px;
     background-color: #ff7043;
@@ -23,16 +24,30 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 1rem;
   }
   
   .meal-finder button:hover {
     background-color: #ff5722;
     transform: scale(1.05);
   }
-  .meal-finder p {
-    font-size: 1rem;
-    margin: 1rem 0;
+  
+  .filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
+  
+  .dropdown {
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Segoe UI', sans-serif;
+    border: 1px solid #ccc;
+  }
+  
   .meal-card {
     margin-top: 2rem;
     background-color: white;
@@ -85,6 +100,23 @@
   .meal-card a:hover {
     color: #0d47a1;
   }
+  
+  .save-btn {
+    margin-top: 1rem;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .save-btn:hover {
+    background-color: #388e3c;
+  }
+  
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -95,6 +127,7 @@
       transform: translateY(0);
     }
   }
+  
   @media (max-width: 600px) {
     .meal-finder {
       padding: 1.5rem;
@@ -102,6 +135,11 @@
   
     .meal-card img {
       max-width: 100%;
+    }
+  
+    .filters {
+      flex-direction: column;
+      align-items: center;
     }
   }
   
