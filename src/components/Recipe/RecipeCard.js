@@ -1,7 +1,10 @@
 import React from "react";
-import "./RecipeCard.css"; // Optional styling
+import { useMealContext } from "../../context/MealContext";
+import "./RecipeCard.css";
 
-function RecipeCard({ dish, onSave, onInfo }) {
+function RecipeCard({ dish }) {
+  const { bookmarkMeal, setExpandedMeal } = useMealContext();
+
   return (
     <div className="meal-card">
       <img src={dish.strMealThumb} alt={dish.strMeal} />
@@ -9,8 +12,8 @@ function RecipeCard({ dish, onSave, onInfo }) {
       <p><strong>Region:</strong> {dish.strArea}</p>
       <p><strong>Category:</strong> {dish.strCategory}</p>
       <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem" }}>
-        <button onClick={() => onSave(dish)} className="save-btn">💾 Save</button>
-        <button onClick={() => onInfo(dish)}>ℹ️ Info</button>
+        <button onClick={() => bookmarkMeal(dish)} className="save-btn">💾 Save</button>
+        <button onClick={() => setExpandedMeal(dish)}>ℹ️ Info</button>
       </div>
     </div>
   );

@@ -1,12 +1,20 @@
 import React, { useState } from "react";
+import { useMealContext } from "../../context/MealContext";
 import RecipeCard from "../../components/Recipe/RecipeCard";
 import RecipeDetails from "../../components/Recipe/RecipeDetails";
 import "./RandomRecipes.css";
 
 function RandomRecipes() {
-  const [highlightedMeal, setHighlightedMeal] = useState(null);
-  const [foundMeals, setFoundMeals] = useState([]);
-  const [expandedMeal, setExpandedMeal] = useState(null); // For opening a card from search
+  const {
+    highlightedMeal,
+    setHighlightedMeal,
+    foundMeals,
+    setFoundMeals,
+    expandedMeal,
+    setExpandedMeal,
+    bookmarkMeal,
+  } = useMealContext();
+
   const [isFetching, setIsFetching] = useState(false);
   const [message, setMessage] = useState("");
   const [query, setQuery] = useState("");
@@ -65,17 +73,6 @@ function RandomRecipes() {
     setIsFetching(false);
   };
 
-  const bookmarkMeal = (dish) => {
-    const stored = JSON.parse(localStorage.getItem("favMeals")) || [];
-    if (!stored.some((x) => x.idMeal === dish.idMeal)) {
-      stored.push(dish);
-      localStorage.setItem("favMeals", JSON.stringify(stored));
-      alert("Saved!");
-    } else {
-      alert("Already there.");
-    }
-  };
-
   return (
     <div className="meal-finder">
       <h2>🍽️ MealWise - Random Recipes</h2>
@@ -94,6 +91,7 @@ function RandomRecipes() {
 
       {isFetching && <p>Loading...</p>}
       {message && <p className="error">{message}</p>}
+
       {(highlightedMeal || expandedMeal) && (
         <RecipeDetails
           meal={highlightedMeal || expandedMeal}
@@ -104,6 +102,7 @@ function RandomRecipes() {
           }}
         />
       )}
+
       {foundMeals.length > 0 && (
         <div className="meal-grid">
           {foundMeals.map((dish) => (

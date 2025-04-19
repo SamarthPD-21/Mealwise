@@ -1,4 +1,5 @@
 import React from "react";
+import { useMealContext } from "../../context/MealContext";
 import "./RecipeDetails.css";
 
 function extractIngredients(item) {
@@ -13,7 +14,14 @@ function extractIngredients(item) {
   return result;
 }
 
-function RecipeDetails({ meal, onSave, onClose }) {
+function RecipeDetails({ meal }) {
+  const { bookmarkMeal, setHighlightedMeal, setExpandedMeal } = useMealContext();
+
+  const handleClose = () => {
+    setHighlightedMeal(null);
+    setExpandedMeal(null);
+  };
+
   return (
     <div className="meal-card large">
       <img src={meal.strMealThumb} alt={meal.strMeal} />
@@ -37,8 +45,8 @@ function RecipeDetails({ meal, onSave, onClose }) {
         </a>
       )}
 
-      <button onClick={() => onSave(meal)} className="save-btn">💾 Save Recipe</button>
-      <button onClick={onClose} style={{ marginLeft: "1rem" }}>❌ Close</button>
+      <button onClick={() => bookmarkMeal(meal)} className="save-btn">💾 Save Recipe</button>
+      <button onClick={handleClose} style={{ marginLeft: "1rem" }}>❌ Close</button>
     </div>
   );
 }
