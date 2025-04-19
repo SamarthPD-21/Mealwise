@@ -1,0 +1,72 @@
+.meal-card.large {
+    background: #fffdf5;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    position: relative;
+  }
+  
+  .meal-card.large img {
+    max-width: 100%;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+  }
+  
+  .meal-card.large h3 {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+    color: #222;
+  }
+  
+  .meal-card.large p,
+  .meal-card.large li {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+  }
+  
+  .meal-card.large ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .meal-card.large a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 1rem;
+  }
+  
+  .meal-card.large a:hover {
+    text-decoration: underline;
+  }
+  
+  .meal-card.large .save-btn,
+  .meal-card.large .close-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #10b981;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .meal-card.large .close-btn {
+    background-color: #ef4444;
+    margin-left: 0.75rem;
+  }
+  
+  .meal-card.large .save-btn:hover {
+    background-color: #059669;
+  }
+  
+  .meal-card.large .close-btn:hover {
+    background-color: #dc2626;
+  }
+  

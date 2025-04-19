@@ -1,0 +1,150 @@
+.meal-finder {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  background-color: #fefefe;
+}
+
+.meal-finder h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.dropdown,
+.search-box {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.dropdown:focus,
+.search-box:focus {
+  border-color: #ff6b6b;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ff3b3b;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* Grid of meals */
+.meal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+/* Meal cards */
+.meal-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.meal-card:hover {
+  transform: scale(1.02);
+}
+
+.meal-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.meal-card h3 {
+  margin: 0.8rem 0 0.3rem;
+  color: #444;
+}
+
+.meal-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.2rem 0;
+}
+
+.meal-card .save-btn {
+  margin-top: 0.5rem;
+  background-color: #4caf50;
+}
+
+.meal-card .save-btn:hover {
+  background-color: #3f9142;
+}
+
+/* Big detailed card */
+.large {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  text-align: left;
+  padding: 1rem;
+}
+
+.large h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.large h4 {
+  margin-top: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.large ul {
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+
+.large a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.large a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .filters {
+    flex-direction: column;
+  }
+
+  .large {
+    padding: 1rem;
+  }
+}
