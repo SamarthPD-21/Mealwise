@@ -11,6 +11,9 @@ function Navbar() {
       <NavLink to="/planner" className={({ isActive }) => (isActive ? "active" : "")}>
         Weekly Planner
       </NavLink>
+      <NavLink to="/grocery" className={({ isActive }) => (isActive ? "active" : "")}>
+        Grocery List
+      </NavLink>
     </nav>
   );
 }

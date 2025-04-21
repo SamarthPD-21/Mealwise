@@ -1,0 +1,102 @@
+.grocery-container {
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.grocery-container h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.grocery-day-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: 600px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grocery-day-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.grocery-day-card h3 {
+  font-size: 1.8rem;
+  color: #444;
+  margin: 0;
+  text-align: left;
+}
+
+.grocery-day-card.expanded {
+  background: #f0f8ff;
+}
+
+.ingredients-list {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease;
+}
+
+.grocery-day-card.expanded .ingredients-list {
+  max-height: 500px; /* Adjust based on content */
+}
+
+.grocery-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.grocery-list li {
+  background: #fff;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.grocery-list input[type="checkbox"] {
+  margin-right: 1rem;
+}
+
+/* Make dropdown vertically scrollable */
+.grocery-list {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.grocery-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.grocery-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.grocery-list::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+.grocery-list button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.grocery-list button:hover {
+  background-color: #ff3b3b;
+}

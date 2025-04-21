@@ -1,120 +1,112 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useMealContext } from "../../context/MealContext";
 import RecipeCard from "../../components/Recipe/RecipeCard";
-import RecipeDetails from "../../components/Recipe/RecipeDetails";
+import Pagination from "../../components/Pagination";
 import "./RandomRecipes.css";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 function RandomRecipes() {
-  const {
-    highlightedMeal,
-    setHighlightedMeal,
-    foundMeals,
-    setFoundMeals,
-    expandedMeal,
-    setExpandedMeal,
-    bookmarkMeal,
-  } = useMealContext();
+  const { recipes, setRecipes, addMealToPlanner } = useMealContext();
 
-  const [isFetching, setIsFetching] = useState(false);
-  const [message, setMessage] = useState("");
-  const [query, setQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(() => {
+    return parseInt(localStorage.getItem("currentPage")) || 1;
+  });
+  const [totalResults, setTotalResults] = useState(0);
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return localStorage.getItem("searchQuery") || "";
+  });
+  const [loading, setLoading] = useState(true);
+  const pageSize = 10;
 
-  const surpriseMe = async () => {
-    setIsFetching(true);
-    setMessage("");
-    setHighlightedMeal(null);
-    setFoundMeals([]);
-    setExpandedMeal(null);
-
+  const fetchRecipes = async (search = "", page = currentPage, randomSeed = "") => {
     try {
-      const res = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=");
-      const data = await res.json();
-      const pool = data.meals;
+      setLoading(true);
+      const offset = (page - 1) * pageSize;
+      const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=${pageSize}&offset=${offset}&addRecipeInformation=true${
+        search ? `&query=${search}` : ""
+      }${randomSeed ? `&randomSeed=${randomSeed}` : ""}`;
 
-      if (!pool) throw new Error("Couldn’t load meals.");
-
-      const detailed = await Promise.all(
-        pool.slice(0, 15).map((item) =>
-          fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${item.idMeal}`).then((r) => r.json())
-        )
-      );
-
-      const mealArray = detailed.map((d) => d.meals[0]);
-      const chosen = mealArray[Math.floor(Math.random() * mealArray.length)];
-
-      setHighlightedMeal(chosen);
-    } catch (err) {
-      setMessage(err.message);
+      const response = await axios.get(url);
+      setRecipes(response.data.results);
+      setTotalResults(response.data.totalResults);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
     }
-
-    setIsFetching(false);
   };
 
-  const runSearch = async () => {
-    if (!query.trim()) return;
-
-    setIsFetching(true);
-    setMessage("");
-    setHighlightedMeal(null);
-    setExpandedMeal(null);
-    setFoundMeals([]);
-
-    try {
-      const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
-      const data = await res.json();
-
-      if (!data.meals) throw new Error("Nothing matched.");
-
-      setFoundMeals(data.meals);
-    } catch (err) {
-      setMessage(err.message);
-    }
-
-    setIsFetching(false);
+  const handleSearch = () => {
+    setCurrentPage(1);
+    fetchRecipes(searchQuery, 1);
   };
+
+  const handleRandomize = () => {
+    setSearchQuery("");
+    setCurrentPage(1);
+    fetchRecipes("", 1, Date.now());
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handleAddToPlanner = (recipe) => {
+    const mealData = {
+      id: recipe.id,
+      title: recipe.title,
+      image: recipe.image,
+    };
+    addMealToPlanner(mealData);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("searchQuery", searchQuery);
+    localStorage.setItem("currentPage", currentPage);
+  }, [searchQuery, currentPage]);
 
   return (
     <div className="meal-finder">
-      <h2>🍽️ MealWise - Random Recipes</h2>
-
+      <h2>Random Recipes</h2>
       <div className="filters">
         <input
-          type="text"
-          placeholder="🔍 Find a dish"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
           className="search-box"
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSearch();
+          }}
+          placeholder="Search recipes..."
         />
-        <button onClick={runSearch}>Search</button>
-        <button onClick={surpriseMe}>🎲 Random Meal</button>
+        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleRandomize}>Randomize</button>
       </div>
 
-      {isFetching && <p>Loading...</p>}
-      {message && <p className="error">{message}</p>}
-
-      {(highlightedMeal || expandedMeal) && (
-        <RecipeDetails
-          meal={highlightedMeal || expandedMeal}
-          onSave={bookmarkMeal}
-          onClose={() => {
-            setHighlightedMeal(null);
-            setExpandedMeal(null);
-          }}
-        />
-      )}
-
-      {foundMeals.length > 0 && (
-        <div className="meal-grid">
-          {foundMeals.map((dish) => (
+      <div className="meal-grid">
+        {loading ? (
+          <p>Loading recipes...</p>
+        ) : recipes?.length > 0 ? (
+          recipes.map((recipe) => (
             <RecipeCard
-              key={dish.idMeal}
-              dish={dish}
-              onSave={bookmarkMeal}
-              onInfo={() => setExpandedMeal(dish)}
+              key={recipe.id}
+              recipe={recipe}
+              onSave={() => handleAddToPlanner(recipe)}
             />
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <p>No recipes found.</p>
+        )}
+      </div>
+
+      <Pagination
+        currentPage={currentPage}
+        totalItems={totalResults}
+        itemsPerPage={pageSize}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

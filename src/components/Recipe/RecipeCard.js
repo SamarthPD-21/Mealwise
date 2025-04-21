@@ -1,22 +1,34 @@
 import React from "react";
-import { useMealContext } from "../../context/MealContext";
+import { useNavigate } from "react-router-dom";
 import "./RecipeCard.css";
 
-function RecipeCard({ dish }) {
-  const { bookmarkMeal, setExpandedMeal } = useMealContext();
+const RecipeCard = ({ recipe, onSave }) => {
+  const navigate = useNavigate();
+
+  const handleInfoClick = () => {
+    navigate(`/recipe/${recipe.id}`);
+  };
 
   return (
     <div className="meal-card">
-      <img src={dish.strMealThumb} alt={dish.strMeal} />
-      <h3>{dish.strMeal}</h3>
-      <p><strong>Region:</strong> {dish.strArea}</p>
-      <p><strong>Category:</strong> {dish.strCategory}</p>
-      <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem" }}>
-        <button onClick={() => bookmarkMeal(dish)} className="save-btn">💾 Save</button>
-        <button onClick={() => setExpandedMeal(dish)}>ℹ️ Info</button>
+      <img
+        src={recipe?.image || "/placeholder.jpg"}
+        alt={recipe?.title || "Recipe"}
+      />
+      <h3>{recipe?.title}</h3>
+      <p>
+        {recipe?.readyInMinutes} mins | {recipe?.servings} servings
+      </p>
+      <div className="card-buttons">
+        <button className="info-btn" onClick={handleInfoClick}>
+          Info
+        </button>
+        <button className="save-btn" onClick={onSave}>
+          Save to Planner
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default RecipeCard;
