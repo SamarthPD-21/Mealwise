@@ -44,7 +44,13 @@ MealWise is a modern web application designed to simplify meal planning and groc
 
 - **Frontend:** React, React Router
 - **Styling:** CSS (with animations and responsive design)
-- **API Integration:** Spoonacular API
+- **API Integration:** Spoonacular API, Context API, localStorage API
 - **State Management:** React Context API
 - **Deployment:** Vercel
 - **Local Storage:** Persist user data (e.g., weekly meals, grocery list) across sessions.
+
+
+## Improvements Required
+- **CSS** Need to make it look better
+- **Nutrition page** Need to implement but the spoonacular api has alot of problems
+- **Api Limitations**  only 150 calls per day
