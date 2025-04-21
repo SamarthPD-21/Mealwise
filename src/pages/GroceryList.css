@@ -45,7 +45,7 @@
 }
 
 .grocery-day-card.expanded .ingredients-list {
-  max-height: 500px; /* Adjust based on content */
+  max-height: 500px;
 }
 
 .grocery-list {
@@ -67,10 +67,8 @@
 .grocery-list input[type="checkbox"] {
   margin-right: 1rem;
 }
-
-/* Make dropdown vertically scrollable */
 .grocery-list {
-  max-height: 300px; /* Adjust as needed */
+  max-height: 300px;
   overflow-y: auto;
 }
 

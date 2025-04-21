@@ -55,7 +55,6 @@ button:hover {
   margin-top: 1rem;
 }
 
-/* Grid of meals */
 .meal-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -63,8 +62,6 @@ button:hover {
   margin-top: 2rem;
   padding: 1rem;
 }
-
-/* Meal cards */
 .meal-card {
   background: #fff;
   border-radius: 1rem;
@@ -103,8 +100,6 @@ button:hover {
 .meal-card .save-btn:hover {
   background-color: #3f9142;
 }
-
-/* Big detailed card */
 .large {
   max-width: 800px;
   margin: 0 auto 2rem;

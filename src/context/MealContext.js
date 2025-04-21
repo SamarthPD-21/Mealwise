@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const MealContext = createContext();
 
 export const MealProvider = ({ children }) => {
-  const [recipes, setRecipes] = useState([]); // Add recipes and setRecipes
+  const [recipes, setRecipes] = useState([]); 
   const [weeklyMeals, setWeeklyMeals] = useState(() => {
     const savedMeals = localStorage.getItem("weeklyMeals");
     return savedMeals ? JSON.parse(savedMeals) : [];
@@ -49,7 +49,7 @@ export const MealProvider = ({ children }) => {
     const mealToRemove = weeklyMeals[index];
     setWeeklyMeals((prev) => {
       const updatedMeals = prev.filter((_, i) => i !== index);
-      localStorage.setItem("weeklyMeals", JSON.stringify(updatedMeals)); // Update local storage
+      localStorage.setItem("weeklyMeals", JSON.stringify(updatedMeals)); 
       return updatedMeals;
     });
 
@@ -79,7 +79,7 @@ export const MealProvider = ({ children }) => {
     <MealContext.Provider
       value={{
         recipes,
-        setRecipes, // Provide setRecipes
+        setRecipes, 
         weeklyMeals,
         setWeeklyMeals,
         groceryItems,

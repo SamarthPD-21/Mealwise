@@ -4,7 +4,7 @@ import RandomRecipes from "./pages/RandomRecipes/RandomRecipes";
 import WeeklyPlanner from "./pages/WeeklyPlanner";
 import GroceryList from "./pages/GroceryList";
 import Navbar from "./components/Navbar/Navbar";
-import RecipeDetails from "./pages/RandomRecipes/RecipeDetails"; // Correct path for RecipeDetails
+import RecipeDetails from "./pages/RandomRecipes/RecipeDetails";
 import { MealProvider } from "./context/MealContext";
 
 function App() {

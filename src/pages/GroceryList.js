@@ -5,7 +5,7 @@ import { useMealContext } from "../context/MealContext";
 function GroceryList() {
   const { mealsByDay } = useMealContext();
   const [ingredientsByDay, setIngredientsByDay] = useState({});
-  const [expandedDay, setExpandedDay] = useState(null); // Track which day is expanded
+  const [expandedDay, setExpandedDay] = useState(null); 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,7 @@ function GroceryList() {
         const dayWiseIngredients = {};
 
         for (const [day, meals] of Object.entries(mealsByDay)) {
-          if (meals.length === 0) continue; // Skip days with no meals
+          if (meals.length === 0) continue;
 
           const ingredientsSet = new Set();
 
@@ -46,7 +46,7 @@ function GroceryList() {
   }, [mealsByDay]);
 
   const toggleDay = (day) => {
-    setExpandedDay((prev) => (prev === day ? null : day)); // Toggle the expanded day
+    setExpandedDay((prev) => (prev === day ? null : day));
   };
 
   return (
